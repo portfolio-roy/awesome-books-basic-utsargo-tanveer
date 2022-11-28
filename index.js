@@ -39,7 +39,7 @@ class Collection {
     // get the book element by id
     const bookElement = document.getElementById(bookId);
     bookElement.remove();
-    this.bookData = this.bookData.filter((bookObject) => bookObject.id !== bookId);
+    this.bookData = this.bookData.filter((bookObject) => bookObject.bookId !== bookId);
     localStorage.setItem('collection', JSON.stringify(this.bookData));
   }
 }
@@ -61,12 +61,12 @@ function readInput() {
 function addToPage(bookObject) {
   const bookList = document.getElementById('book-list');
   const singleBook = document.createElement('div');
-  singleBook.setAttribute('id', bookObject.id);
+  singleBook.setAttribute('id', bookObject.bookId);
   singleBook.innerHTML = `<p>${bookObject.title}</p>
                     <p>${bookObject.author}</p>`;
   const deleteBtn = document.createElement('button');
   deleteBtn.innerHTML = 'Delete';
-  deleteBtn.addEventListener('click', () => collection.deleteBook(bookObject.id));
+  deleteBtn.addEventListener('click', () => collection.deleteBook(bookObject.bookId));
   const hr = document.createElement('hr');
   singleBook.appendChild(deleteBtn);
   singleBook.appendChild(hr);
