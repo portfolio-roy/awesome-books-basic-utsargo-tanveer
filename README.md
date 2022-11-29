@@ -63,7 +63,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](http://portfolio.utsargo.tech/awesome-books-basic-utsargo-tanveer/)
+#### <a href="http://portfolio.utsargo.tech/awesome-books-basic-utsargo-tanveer" target="_blank">Live Demo Link</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
