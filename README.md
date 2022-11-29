@@ -82,7 +82,7 @@ Clone this repository to your desired folder:
 
 
 ```sh
-  git clone git@github.com:portfolio-roy/capstone-1.git
+  git clone git@github.com:portfolio-roy/awesome-books-basic-utsargo-tanveer.git
   cd capstone-1
 ```
 
