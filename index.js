@@ -5,12 +5,21 @@
 //  1. Book name/title
 //  2. Book author
 //  3. A unique id to identify the book (we can use Math.random() to generate the id)
+function genId(length) {
+  let id = '';
+  let chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let charLength = chars.length;
+  for ( let i = 0; i < length; i++ ) {
+      id += chars.charAt(Math.floor(Math.random() * charLength));
+  }
+  return id;
+}
 
 class BookInfo {
   constructor(title, author) {
     this.title = title;
     this.author = author;
-    this.bookId = Math.random();
+    this.bookId = genId(8);
   }
 }
 
@@ -30,7 +39,7 @@ class Collection {
     // push BookInfo to bookData
     this.bookData.push(singleBook);
     // save it to localStorage
-    localStorage.setItem('collection', JSON.stringify(this.bookData));
+    localStorage.setItem('BookList', JSON.stringify(this.bookData));
     // add to the webpage
     addToPage(singleBook);
   }
@@ -40,7 +49,7 @@ class Collection {
     const bookElement = document.getElementById(bookId);
     bookElement.remove();
     this.bookData = this.bookData.filter((bookObject) => bookObject.bookId !== bookId);
-    localStorage.setItem('collection', JSON.stringify(this.bookData));
+    localStorage.setItem('BookList', JSON.stringify(this.bookData));
   }
 }
 const collection = new Collection();
@@ -51,11 +60,11 @@ function readInput() {
   // get book title from the input
   const author = document.getElementById('book-author');
   // create a book object
-  const book = new BookInfo(title.value, author.value);
+  const singleBook = new BookInfo(title.value, author.value);
   // reset the form
   title.value = '';
   author.value = '';
-  return book;
+  return singleBook;
 }
 // Create a function to add data to the page
 function addToPage(bookObject) {
@@ -82,11 +91,11 @@ addBtn.addEventListener('click', () => {
 
 // construct the collection ont the page using data from local storage
 window.onload = () => {
-  collection.data = JSON.parse(localStorage.getItem('collection' || '[]'));
-  if (collection.data === null) {
-    collection.data = [];
+  collection.bookData = JSON.parse(localStorage.getItem('BookList' || '[]'));
+  if (collection.bookData === null) {
+    collection.bookData = [];
     return;
   }
 
-  collection.data.forEach((singleBook) => addToPage(singleBook));
+  collection.bookData.forEach((singleBook) => addToPage(singleBook));
 };
