@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable max-classes-per-file */
+/* eslint-disable no-plusplus */
 
 // Create A constructor class for book object. Object should have:
 //  1. Book name/title
@@ -7,10 +8,10 @@
 //  3. A unique id to identify the book (we can use Math.random() to generate the id)
 function genId(length) {
   let id = '';
-  let chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let charLength = chars.length;
-  for ( let i = 0; i < length; i++ ) {
-      id += chars.charAt(Math.floor(Math.random() * charLength));
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  const charLength = chars.length;
+  for (let i = 0; i < length; i++) {
+    id += chars.charAt(Math.floor(Math.random() * charLength));
   }
   return id;
 }
@@ -69,17 +70,17 @@ function readInput() {
 // Create a function to add data to the page
 function addToPage(bookObject) {
   let liColor = '';
-  if (collection.bookData.indexOf(bookObject) === 0){
+  if (collection.bookData.indexOf(bookObject) === 0) {
     liColor = 'gray';
-  } else if (collection.bookData.indexOf(bookObject) % 2 !== 0){
+  } else if (collection.bookData.indexOf(bookObject) % 2 !== 0) {
     liColor = 'white';
   } else {
     liColor = 'gray';
   }
   const bookList = document.getElementById('book-list');
   const singleBook = document.createElement('li');
-  singleBook.classList.add(liColor)
-  singleBook.classList.add('single-book')
+  singleBook.classList.add(liColor);
+  singleBook.classList.add('single-book');
   singleBook.setAttribute('id', bookObject.bookId);
   singleBook.innerHTML = `<p>${bookObject.title}</p>
                     <p>${bookObject.author}</p>`;
