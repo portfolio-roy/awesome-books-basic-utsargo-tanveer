@@ -1,11 +1,14 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable no-plusplus */
+/* eslint-disable no-unused-vars */
 
 // Create A constructor class for book object. Object should have:
 //  1. Book name/title
 //  2. Book author
 //  3. A unique id to identify the book (we can use Math.random() to generate the id)
+
+// a function to generate unique alpha-numeric id
 function genId(length) {
   let id = '';
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -107,4 +110,41 @@ window.onload = () => {
   }
 
   collection.bookData.forEach((singleBook) => addToPage(singleBook));
+  document.getElementById('date').innerHTML = Date();
 };
+
+// menu
+
+function showSec(section) {
+  const secBookList = document.getElementById('list');
+  const secBookForm = document.getElementById('add-book');
+  const secContact = document.getElementById('contact');
+
+  switch (section) {
+    case 'list':
+      if (secBookList.classList.contains('d-none')) {
+        secBookList.classList.remove('d-none');
+        secBookForm.classList.add('d-none');
+        secContact.classList.add('d-none');
+      }
+      break;
+
+    case 'form':
+      if (secBookForm.classList.contains('d-none')) {
+        secBookForm.classList.remove('d-none');
+        secBookList.classList.add('d-none');
+        secContact.classList.add('d-none');
+      }
+      break;
+
+    case 'contact':
+      if (secContact.classList.contains('d-none')) {
+        secContact.classList.remove('d-none');
+        secBookForm.classList.add('d-none');
+        secBookList.classList.add('d-none');
+      }
+      break;
+
+    default: break;
+  }
+}
