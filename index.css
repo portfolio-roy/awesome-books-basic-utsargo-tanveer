@@ -19,10 +19,44 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  min-height: 95vh;
+}
+
+header,
+footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid black;
+  align-items: center;
+  padding: 0 16px;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  list-style-type: none;
+}
+
+nav ul li a {
+  cursor: pointer;
+}
+
+#date {
+  width: 100%;
+  text-align: right;
+  margin-top: 36px;
 }
 
 .container {
   width: 90%;
+}
+
+.top {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,6 +99,17 @@ hr {
 
 button {
   padding: 5px 10px;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.d-none {
+  display: none !important;
 }
 
 @media screen and (min-width: 960px) {
