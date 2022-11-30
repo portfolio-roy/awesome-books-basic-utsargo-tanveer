@@ -1,19 +1,13 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable max-classes-per-file */
-/* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
-
-// Create A constructor class for book object. Object should have:
-//  1. Book name/title
-//  2. Book author
-//  3. A unique id to identify the book (we can use Math.random() to generate the id)
 
 // a function to generate unique alpha-numeric id
 function genId(length) {
   let id = '';
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   const charLength = chars.length;
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < length; i += 1) {
     id += chars.charAt(Math.floor(Math.random() * charLength));
   }
   return id;
