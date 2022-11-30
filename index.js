@@ -63,7 +63,6 @@ function readInput() {
   const title = document.getElementById('book-title');
   // get book title from the input
   const author = document.getElementById('book-author');
-  // create a book object
   const singleBook = new BookInfo(title.value, author.value);
   // reset the form
   title.value = '';

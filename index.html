@@ -30,9 +30,9 @@
     <div class="content d-none" id="add-book">
     <h2>Add a book</h2>
     <div id="form" class="form">
-        <form action="#" class="input-form" id="book-form" method="post">
-          <input id="book-title" type="text" placeholder="Title"><br>
-          <input id="book-author" type="text" placeholder="Author"><br>
+        <form name="book-form" action="#" class="input-form" id="book-form" onsubmit="return validateForm()" method="post">
+          <input id="book-title" type="text" placeholder="Title" name="title" required><br>
+          <input id="book-author" type="text" placeholder="Author" name="author" required><br>
           <button id="add-btn" type="button">Add</button>
         </form>
       </div>
@@ -48,7 +48,7 @@
     </div>
    
     </div>
-    </main>
+    
     <!-- footer -->
     <footer class="container">
       <p class="footer-txt"><span class="copy-left">&#127279;</span> All contents are copylefted. You can find the the source on <a herf="https://github.com/portfolio-roy/awesome-books-basic-utsargo-tanveer" target="_blank"><strong>Github</strong></a></p>
