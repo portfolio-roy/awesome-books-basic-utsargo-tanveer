@@ -58,18 +58,22 @@ function readInput() {
   // get book title from the input
   const author = document.getElementById('book-author');
   const errorMsg = document.getElementById('error');
-  if (title.value === '' && author.value === '') {
-    errorMsg.innerHTML = '* All fields required';
+  const successMsg= document.getElementById('success');
+    if (title.value === '' && author.value === '') {
+    errorMsg.innerHTML = '* All fields are required';
     return false;
-  } if (title.value === '') {
+  }else if (title.value === '') {
     errorMsg.innerHTML = '* Title Empty';
-  } else if (author.value === '') {
+    return false
+  }else if (author.value === '') {
     errorMsg.innerHTML = '* Author Empty';
     return false;
   }
   const singleBookInput = new BookInfo(title.value, author.value);
   // reset the form
   errorMsg.innerHTML = '';
+  successMsg.innerHTML = `You added a book! See in the <strong><a onclick="showSec('list')">List</a></strong>`;
+  successMsg.classList.remove('d-none');
   title.value = '';
   author.value = '';
   return singleBookInput;
@@ -119,6 +123,7 @@ function showSec(section) {
   const secBookList = document.getElementById('list');
   const secBookForm = document.getElementById('add-book');
   const secContact = document.getElementById('contact');
+  const successMsg = document.getElementById('success')
 
   switch (section) {
     case 'list':
@@ -134,6 +139,7 @@ function showSec(section) {
         secBookForm.classList.remove('d-none');
         secBookList.classList.add('d-none');
         secContact.classList.add('d-none');
+        successMsg.classList.add('d-none');
       }
       break;
 

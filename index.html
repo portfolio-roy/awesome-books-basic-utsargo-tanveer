@@ -26,6 +26,7 @@
       <div class="content" id="list">
       <h2>Awesome Book List</h2>
       <table id="book-list"></table>
+      <p id="empty-message" class="d-none">The list is empty. <a onclick="showSec('form')">Add some books</a>.</p>
   </div>
     <div class="content d-none" id="add-book">
     <h2>Add a book</h2>
@@ -34,6 +35,7 @@
           <input id="book-title" type="text" placeholder="Title (required)" name="title" required><br>
           <input id="book-author" type="text" placeholder="Author (required)" name="author" required><br>
           <p id="error"></p>
+          <p id="success"></p>
           <button id="add-btn" type="button">Add</button>
         </form>
       </div>
