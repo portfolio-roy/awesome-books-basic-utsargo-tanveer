@@ -76,17 +76,8 @@ function readInput() {
 }
 // Create a function to add data to the page
 function addToPage(bookObject) {
-  // let liColor = '';
-  // if (collection.bookData.indexOf(bookObject) === 0) {
-  //   liColor = 'gray';
-  // } else if (collection.bookData.indexOf(bookObject) % 2 !== 0) {
-  //   liColor = 'white';
-  // } else {
-  //   liColor = 'gray';
-  // }
   const bookList = document.getElementById('book-list');
   const singleBook = document.createElement('tr');
-  // singleBook.classList.add(liColor);
   singleBook.classList.add('single-book');
   singleBook.setAttribute('id', bookObject.bookId);
   singleBook.innerHTML = `<td>${bookObject.title}</td>
