@@ -59,6 +59,7 @@ function readInput() {
   const author = document.getElementById('book-author');
   const errorMsg = document.getElementById('error');
   const successMsg= document.getElementById('success');
+  
     if (title.value === '' && author.value === '') {
     errorMsg.innerHTML = '* All fields are required';
     return false;
@@ -74,6 +75,7 @@ function readInput() {
   errorMsg.innerHTML = '';
   successMsg.innerHTML = `You added a book! See in the <strong><a onclick="showSec('list')">List</a></strong>`;
   successMsg.classList.remove('d-none');
+  
   title.value = '';
   author.value = '';
   return singleBookInput;
@@ -82,6 +84,7 @@ function readInput() {
 function addToPage(bookObject) {
   const bookList = document.getElementById('book-list');
   const singleBook = document.createElement('tr');
+  const emptyMsg = document.getElementById ('empty-message');
   singleBook.classList.add('single-book');
   singleBook.setAttribute('id', bookObject.bookId);
   singleBook.innerHTML = `<td>${bookObject.title}</td>
@@ -90,7 +93,15 @@ function addToPage(bookObject) {
   btnCell.classList.add('btn-cell');
   const deleteBtn = document.createElement('button');
   deleteBtn.innerHTML = 'Delete';
-  deleteBtn.addEventListener('click', () => collection.deleteBook(bookObject.bookId));
+  deleteBtn.addEventListener('click', () => {
+    collection.deleteBook(bookObject.bookId);
+    if (bookList.childNodes.length === 0){
+      if (emptyMsg.classList.contains('d-none') === true){
+        emptyMsg.classList.remove('d-none');
+      }
+    }
+  });
+  
   singleBook.appendChild(btnCell);
   btnCell.appendChild(deleteBtn);
   bookList.appendChild(singleBook);
@@ -103,16 +114,25 @@ addBtn.addEventListener('click', () => {
   if (singleBook !== false && singleBook !== null) {
     collection.addBook(singleBook);
   }
+  const emptyMsg = document.getElementById ('empty-message');
+  if (emptyMsg.classList.contains('d-none') === false){
+    emptyMsg.classList.add('d-none');
+  }
 });
 
 // construct the collection ont the page using data from local storage
 window.onload = () => {
   collection.bookData = JSON.parse(localStorage.getItem('Library' || '[]'));
+  const emptyMsg = document.getElementById ('empty-message');
   if (collection.bookData === null) {
     collection.bookData = [];
+    if (emptyMsg.classList.contains('d-none') === true){
+      emptyMsg.classList.remove('d-none');
+    }
     return;
   }
-
+  
+  
   collection.bookData.forEach((singleBook) => addToPage(singleBook));
   document.getElementById('date').innerHTML = Date();
 };
