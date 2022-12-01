@@ -25,14 +25,15 @@
       <!--Switchable content-->
       <div class="content" id="list">
       <h1>Awesome Book List</h1>
-    <ul id="book-list"></ul>
+      <table id="book-list"></table>
   </div>
     <div class="content d-none" id="add-book">
     <h2>Add a book</h2>
     <div id="form" class="form">
         <form name="book-form" action="#" class="input-form" id="book-form" onsubmit="return validateForm()" method="post">
-          <input id="book-title" type="text" placeholder="Title" name="title" required><br>
-          <input id="book-author" type="text" placeholder="Author" name="author" required><br>
+          <input id="book-title" type="text" placeholder="Title (required)" name="title" required><br>
+          <input id="book-author" type="text" placeholder="Author (required)" name="author" required><br>
+          <p id="error"></p>
           <button id="add-btn" type="button">Add</button>
         </form>
       </div>
