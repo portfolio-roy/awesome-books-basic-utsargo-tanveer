@@ -37,7 +37,7 @@ class Collection {
     // push BookInfo to bookData
     this.bookData.push(singleBook);
     // save it to localStorage
-    localStorage.setItem('BookList', JSON.stringify(this.bookData));
+    localStorage.setItem('Library', JSON.stringify(this.bookData));
     // add to the webpage
     addToPage(singleBook);
   }
@@ -47,7 +47,7 @@ class Collection {
     const bookElement = document.getElementById(bookId);
     bookElement.remove();
     this.bookData = this.bookData.filter((bookObject) => bookObject.bookId !== bookId);
-    localStorage.setItem('BookList', JSON.stringify(this.bookData));
+    localStorage.setItem('Library', JSON.stringify(this.bookData));
   }
 }
 const collection = new Collection();
@@ -57,33 +57,53 @@ function readInput() {
   const title = document.getElementById('book-title');
   // get book title from the input
   const author = document.getElementById('book-author');
-  const singleBook = new BookInfo(title.value, author.value);
+  const errorMsg = document.getElementById('error');
+  const successMsg= document.getElementById('success');
+  
+    if (title.value === '' && author.value === '') {
+    errorMsg.innerHTML = '* All fields are required';
+    return false;
+  }else if (title.value === '') {
+    errorMsg.innerHTML = '* Title Empty';
+    return false
+  }else if (author.value === '') {
+    errorMsg.innerHTML = '* Author Empty';
+    return false;
+  }
+  const singleBookInput = new BookInfo(title.value, author.value);
   // reset the form
+  errorMsg.innerHTML = '';
+  successMsg.innerHTML = `You added a book! See in the <strong><a onclick="showSec('list')">List</a></strong>`;
+  successMsg.classList.remove('d-none');
+  
   title.value = '';
   author.value = '';
-  return singleBook;
+  return singleBookInput;
 }
 // Create a function to add data to the page
 function addToPage(bookObject) {
-  let liColor = '';
-  if (collection.bookData.indexOf(bookObject) === 0) {
-    liColor = 'gray';
-  } else if (collection.bookData.indexOf(bookObject) % 2 !== 0) {
-    liColor = 'white';
-  } else {
-    liColor = 'gray';
-  }
   const bookList = document.getElementById('book-list');
-  const singleBook = document.createElement('li');
-  singleBook.classList.add(liColor);
+  const singleBook = document.createElement('tr');
+  const emptyMsg = document.getElementById ('empty-message');
   singleBook.classList.add('single-book');
   singleBook.setAttribute('id', bookObject.bookId);
-  singleBook.innerHTML = `<p>${bookObject.title}</p>
-                    <p>${bookObject.author}</p>`;
+  singleBook.innerHTML = `<td>${bookObject.title}</td>
+  <td>${bookObject.author}</td>`;
+  const btnCell = document.createElement('td');
+  btnCell.classList.add('btn-cell');
   const deleteBtn = document.createElement('button');
   deleteBtn.innerHTML = 'Delete';
-  deleteBtn.addEventListener('click', () => collection.deleteBook(bookObject.bookId));
-  singleBook.appendChild(deleteBtn);
+  deleteBtn.addEventListener('click', () => {
+    collection.deleteBook(bookObject.bookId);
+    if (bookList.childNodes.length === 0){
+      if (emptyMsg.classList.contains('d-none') === true){
+        emptyMsg.classList.remove('d-none');
+      }
+    }
+  });
+  
+  singleBook.appendChild(btnCell);
+  btnCell.appendChild(deleteBtn);
   bookList.appendChild(singleBook);
 }
 
@@ -91,17 +111,28 @@ function addToPage(bookObject) {
 const addBtn = document.getElementById('add-btn');
 addBtn.addEventListener('click', () => {
   const singleBook = readInput();
-  collection.addBook(singleBook);
+  if (singleBook !== false && singleBook !== null) {
+    collection.addBook(singleBook);
+  }
+  const emptyMsg = document.getElementById ('empty-message');
+  if (emptyMsg.classList.contains('d-none') === false){
+    emptyMsg.classList.add('d-none');
+  }
 });
 
 // construct the collection ont the page using data from local storage
 window.onload = () => {
-  collection.bookData = JSON.parse(localStorage.getItem('BookList' || '[]'));
+  collection.bookData = JSON.parse(localStorage.getItem('Library' || '[]'));
+  const emptyMsg = document.getElementById ('empty-message');
   if (collection.bookData === null) {
     collection.bookData = [];
+    if (emptyMsg.classList.contains('d-none') === true){
+      emptyMsg.classList.remove('d-none');
+    }
     return;
   }
-
+  
+  
   collection.bookData.forEach((singleBook) => addToPage(singleBook));
   document.getElementById('date').innerHTML = Date();
 };
@@ -112,6 +143,7 @@ function showSec(section) {
   const secBookList = document.getElementById('list');
   const secBookForm = document.getElementById('add-book');
   const secContact = document.getElementById('contact');
+  const successMsg = document.getElementById('success')
 
   switch (section) {
     case 'list':
@@ -127,6 +159,7 @@ function showSec(section) {
         secBookForm.classList.remove('d-none');
         secBookList.classList.add('d-none');
         secContact.classList.add('d-none');
+        successMsg.classList.add('d-none');
       }
       break;
 

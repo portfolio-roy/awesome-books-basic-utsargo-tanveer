@@ -6,12 +6,8 @@ p {
   margin: 0;
 }
 
-.gray {
-  background-color: lightgrey;
-}
-
-.white {
-  background-color: white;
+a {
+  cursor: pointer;
 }
 
 main {
@@ -66,13 +62,30 @@ nav ul li a {
   border: 1px solid black;
   padding: 0;
   width: 100%;
+  border-spacing: 0;
+  margin-bottom: 48px;
 }
 
 .single-book {
   padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+}
+
+.single-book td {
+  text-align: left;
+  padding: 10px;
+}
+
+.btn-cell {
+  width: 80px;
+  text-align: right !important;
+}
+
+.single-book:nth-child(odd) {
+  background-color: lightgrey;
+}
+
+.single-book:nth-child(even) {
+  background-color: white;
 }
 
 #form {
@@ -110,6 +123,25 @@ button {
 
 .d-none {
   display: none !important;
+}
+
+#error {
+  padding: 0 0 10px;
+  color: red;
+}
+
+#success {
+  padding: 10px;
+  color: green;
+  border: 2px solid green;
+  margin-bottom: 10px;
+}
+
+#empty-message {
+  padding: 10px;
+  color: black;
+  border: 2px solid black;
+  margin-bottom: 10px;
 }
 
 @media screen and (min-width: 960px) {
